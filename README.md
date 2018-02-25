@@ -1,4 +1,4 @@
-# bamboohr-google-calendar-sync
+# BambooHR to Google Calendar Sync tool
 Application for syncing your personal calendar between BambooHR and Google Calendars.
 BambooHR provides iCal links for your entire company and "Who's off today" calendars, but does not give you a personal calendar with your own Time Off requests out of the box. This application fills the void by populating a google calendar of your choice with your BambooHR Time Off requests
 
@@ -22,6 +22,7 @@ Once you have run through this initial configuration, your preferences will be s
 
 Example Runthrough:
 ```
+$ python bamboohr-google-calendar-sync.py
 BambooHR Company: mycompany
 Employee ID: 123456
 BambooHR Access Token (leave blank to use username/password):
