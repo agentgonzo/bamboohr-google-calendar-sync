@@ -10,9 +10,8 @@ Authentication against BambooHR is done via an API Access Key
 ## Installation
 1. Install the dependencies: `sudo pip install -r requirements.txt` (or create a virtualenv to do it in)
 2. Find out you BambooHR employee ID. This can be done by logging in to BambooHR and going to "My Info". Your employee ID is at the end of the URL. eg `https://yourcompany.bamboohr.com/employees/pto/?id=12345`
-3. Create a Google Application with access to your Calendar and get the secrets stored locally: TBD
-4. If possible, get an Access Key for BambooHR. This is done by logging into BambooHR, selecting your avatar/initials in the top-right and selecting **API Keys**. If this is not possible (it's not available for all users) you can still login with a username and password
-5. If you do not want to use your default calendar, find the Calendar ID for the calendar you want to use:
+3. If possible, get an Access Key for BambooHR. This is done by logging into BambooHR, selecting your avatar/initials in the top-right and selecting **API Keys**. If this is not possible (it's not available for all users) you can still login with a username and password
+4. If you do not want to use your default calendar, find the Calendar ID for the calendar you want to use:
     1. Open up Google Calendars
     2. Hit the three dots next to the calendar you want to use and select "Setting and sharing"
     3. Calendar ID is listed under the "Integrate Calendar" section, eg `1234567890abcdefghijk@group.calendar.google.com`
