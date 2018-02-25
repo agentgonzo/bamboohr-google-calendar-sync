@@ -48,7 +48,9 @@ class Config:
             self.config.set(self.BAMBOO_SECTION, 'user', raw_input('BambooHR username: '))
             self.config.set(self.BAMBOO_SECTION, 'password', getpass())
 
-        self.config.set(self.GCAL_SECTION, 'calendar_id', raw_input('Google Calendar ID: '))
+        calendar_id = raw_input("Google Calendar ID (use 'personal' for the your calendar): ") or 'personal'
+        self.config.set(self.GCAL_SECTION, 'calendar_id',
+                        calendar_id)
         self._save()
 
     def save_token(self, token):
