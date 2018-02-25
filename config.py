@@ -1,7 +1,6 @@
 import logging
 import os
 from ConfigParser import SafeConfigParser, NoSectionError, NoOptionError
-from getpass import getpass
 from os.path import expanduser
 
 
@@ -32,6 +31,7 @@ class Config:
             # Check all the mandatory things
             c = self.get_config()
             c[self.BAMBOO_SECTION]['company']
+            c[self.BAMBOO_SECTION]['token']
             c[self.BAMBOO_SECTION]['employee_id']
             c[self.GCAL_SECTION]['calendar_id']
         except (NoSectionError, NoOptionError, KeyError):
@@ -46,7 +46,6 @@ class Config:
         else:
             logging.debug('No token entered - using username/password')
             self.config.set(self.BAMBOO_SECTION, 'user', raw_input('BambooHR username: '))
-            self.config.set(self.BAMBOO_SECTION, 'password', getpass())
 
         calendar_id = raw_input("Google Calendar ID (use 'personal' for the your calendar): ") or 'personal'
         self.config.set(self.GCAL_SECTION, 'calendar_id',
@@ -55,7 +54,6 @@ class Config:
 
     def save_token(self, token):
         self.config.set(self.BAMBOO_SECTION, 'token', token)
-        # TODO: Clear the username/password?
         self._save()
 
     def _save(self):

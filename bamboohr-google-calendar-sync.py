@@ -1,6 +1,7 @@
 import json
 import logging
 from datetime import date, timedelta, datetime
+from getpass import getpass
 
 import requests
 from PyBambooHR import PyBambooHR
@@ -27,9 +28,10 @@ class CalendarSync:
             token = config[Config.BAMBOO_SECTION]['token']
         except KeyError:
             # No token - try getting it from username/password
+            password = getpass()
             token = CalendarSync.get_api_key(config[Config.BAMBOO_SECTION]['company'],
                                              config[Config.BAMBOO_SECTION]['user'],
-                                             config[Config.BAMBOO_SECTION]['password'])
+                                             password)
             outer_config.save_token(token)
 
         self.bamboohr_client = PyBambooHR(config[Config.BAMBOO_SECTION]['company'], token)
@@ -45,7 +47,10 @@ class CalendarSync:
         url = 'https://api.bamboohr.com/api/gateway.php/%s/v1/login' % company
         r = requests.post(url, data=payload, headers={'Accept': "application/json"})
         # I have no idea how long this key is valid for. Let's see when it fails
-        return json.loads(r.text).get('key')
+        if r.ok:
+            return json.loads(r.text).get('key')
+        else:
+            raise Exception('Failed to get Access Token. Invalid username/password?')
 
     def get_time_off_requests(self):
         # Get events up to one year in the past
