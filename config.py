@@ -16,11 +16,11 @@ class Config:
     def __init__(self):
         self._read_config()
 
+    def _read_config(self):
         if not os.path.exists(self.CONFIG_DIR):
             logging.debug('Creating config directory')
             os.makedirs(self.CONFIG_DIR)
 
-    def _read_config(self):
         self.config.read(self.CONFIG_FILE)
         for section in [self.BAMBOO_SECTION, self.GCAL_SECTION]:
             if section not in self.config.sections():
