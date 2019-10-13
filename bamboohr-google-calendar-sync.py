@@ -53,9 +53,10 @@ class CalendarSync:
             raise Exception('Failed to get Access Token. Invalid username/password?')
 
     def get_time_off_requests(self):
-        # Get events up to one year in the past
+        # Get events up to one year in the past and one year in the future
         start = (date.today() - timedelta(days=365)).isoformat()
-        return self.bamboohr_client.get_time_off_requests(start_date=start, employee_id=self.employee_id)
+        end = (date.today() + timedelta(days=365)).isoformat()
+        return self.bamboohr_client.get_time_off_requests(start_date=start, end_date=end, employee_id=self.employee_id)
 
     def update_calendar(self, time_off_requests):
         print('Updating/Creating %s items' % len(time_off_requests))
