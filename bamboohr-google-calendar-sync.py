@@ -69,7 +69,7 @@ class CalendarSync:
             status = booking['status']['status']
             notes = 'Type: ' + booking['type']['name'] + '\n'
             try:
-                notes += 'Notes:\n' + '\n'.join(['  ' + str(k) + ': ' + str(v) for k, v in booking['notes'].items()])
+                notes += 'Notes:\n' + '\n'.join(['  ' + k + ': ' + v for k, v in booking['notes'].items()])
             except AttributeError as e:
                 pass
             summary = 'Time Booked off: ' + status.title()
