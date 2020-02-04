@@ -73,7 +73,7 @@ class CalendarSync:
             except AttributeError as e:
                 pass
             summary = 'Time Booked off: ' + status.title()
-            # Set the status to be what google calendars expents
+            # Set the status to be what google calendars expects
             status = self.STATUS_MAP.get(status, 'tentative')
             logging.debug('Updating Booking: id: %s, start: %s, end: %s, status: %s, summary: %s, notes: %s',
                           event_id, start, end, status, summary, notes)
