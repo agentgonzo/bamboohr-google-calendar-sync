@@ -1,12 +1,14 @@
 import argparse
 import logging
 import os
+import sys
 
 import httplib2
 from apiclient import discovery
 from googleapiclient.errors import HttpError
 from oauth2client import client
 from oauth2client import tools
+from oauth2client.clientsecrets import InvalidClientSecretsError
 from oauth2client.file import Storage
 
 try:
@@ -39,13 +41,16 @@ class GoogleCalendar:
         store = Storage(credential_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
-            flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
-            flow.user_agent = APPLICATION_NAME
-            if flags:
-                credentials = tools.run_flow(flow, store, flags)
-            else:  # Needed only for compatibility with Python 2.6
-                credentials = tools.run(flow, store)
-            print('Storing credentials to ' + credential_path)
+            try:
+                flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+                flow.user_agent = APPLICATION_NAME
+                if flags:
+                    credentials = tools.run_flow(flow, store, flags)
+                else:  # Needed only for compatibility with Python 2.6
+                    credentials = tools.run(flow, store)
+                print('Storing credentials to ' + credential_path)
+            except InvalidClientSecretsError:
+                sys.exit("File not found: " + CLIENT_SECRET_FILE + ". You need to create a GCP app to access the Google Calendar APIs. Follow instructions at https://github.com/agentgonzo/bamboohr-google-calendar-sync#Prerequisites")
         http = credentials.authorize(httplib2.Http())
         self.events = discovery.build('calendar', 'v3', http=http).events()
         self.calendar_id = calendar_id

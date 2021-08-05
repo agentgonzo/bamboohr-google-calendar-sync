@@ -80,7 +80,8 @@ class CalendarSync:
             self.gcal_client.update_event(event_id, start, end, status, summary, notes)
 
 
-app = CalendarSync()
-time_off = app.get_time_off_requests()
-app.update_calendar(time_off)
-print('Done')
+if __name__ == "__main__":
+    app = CalendarSync()
+    time_off = app.get_time_off_requests()
+    app.update_calendar(time_off)
+    print('Done')

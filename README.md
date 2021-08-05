@@ -7,6 +7,15 @@ This application performs a 1-way-sync from BambooHR into any given Google Calen
 ## Authentication
 Authentication against BambooHR is done via an API Access Key
 
+## Prerequisites
+
+You will need to create a Google Cloud Platform Project, enable the Google Calendar APIs and download the credentials for this application.
+
+1. Follow [these instructions](https://developers.google.com/workspace/guides/create-credentials) to create a Google Cloud Platform project.
+2. Enable the [Google Calendar API](https://console.cloud.google.com/apis/library/calendar-json.googleapis.com) for the project.
+3. Create and download (using the instructions above) Oauth 2.0 client credentials for your app. Save these as `google-calendar-client-secret.json` in the local directory.
+4. Once you have performed the "First Run" (below) of the application, you can delete this file.
+
 ## Installation
 1. Install the dependencies: `sudo pip install -r requirements.txt` (or create a virtualenv to do it in)
 2. Find out you BambooHR employee ID. This can be done by logging in to BambooHR and going to "My Info". Your employee ID is at the end of the URL. eg `https://yourcompany.bamboohr.com/employees/pto/?id=12345`
