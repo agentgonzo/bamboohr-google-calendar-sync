@@ -1,6 +1,6 @@
 import logging
 import os
-from ConfigParser import SafeConfigParser, NoSectionError, NoOptionError
+from configparser import SafeConfigParser, NoSectionError, NoOptionError
 from os.path import expanduser
 
 
@@ -38,8 +38,8 @@ class Config:
             self._input_config()
 
     def _input_config(self):
-        self.config.set(self.BAMBOO_SECTION, 'company', raw_input('BambooHR Company: '))
-        self.config.set(self.BAMBOO_SECTION, 'employee_id', raw_input('Employee ID: '))
+        self.config.set(self.BAMBOO_SECTION, 'company', input('BambooHR Company: '))
+        self.config.set(self.BAMBOO_SECTION, 'employee_id', input('Employee ID: '))
         token = raw_input('BambooHR Access Token (leave blank to use username/password): ')
         if token:
             self.config.set(self.BAMBOO_SECTION, 'token', token)
@@ -65,4 +65,4 @@ class Config:
 
 
 if __name__ == '__main__':
-    print Config().get_config()
+    print(Config().get_config())

@@ -34,7 +34,7 @@ class CalendarSync:
                                              password)
             outer_config.save_token(token)
 
-        self.bamboohr_client = PyBambooHR(config[Config.BAMBOO_SECTION]['company'], token)
+        self.bamboohr_client = PyBambooHR(subdomain=config[Config.BAMBOO_SECTION]['company'], api_key=token)
         self.gcal_client = GoogleCalendar(config[Config.GCAL_SECTION]['calendar_id'])
         self.employee_id = config[Config.BAMBOO_SECTION]['employee_id']
 
